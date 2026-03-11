@@ -5,7 +5,7 @@ date: 2026-03-11
 tags: ["personal", "introducción"]
 ---
 
-Hola, soy Josse — ingeniero de sistemas y desarrollador full-stack con foco en backend, desde Montería, Córdoba, Colombia.
+Hola, soy Jotive — ingeniero de sistemas y desarrollador full-stack con foco en backend, desde Montería, Córdoba, Colombia.
 
 Este espacio es mi rincón técnico personal. Un lugar donde pienso en voz alta sobre desarrollo, arquitectura, productos digitales y todo lo que voy aprendiendo en el camino.
 
