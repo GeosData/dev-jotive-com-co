@@ -1,43 +1,64 @@
-# Astro Starter Kit: Minimal
+# dev.jotive.com.co
 
-```sh
-npm create astro@latest -- --template minimal
+Espacio técnico personal de Jotive. Backend, arquitectura de software, experimentos de código y notas de desarrollo.
+
+## Stack
+
+- [Astro 6](https://astro.build/) — generador de sitios estáticos
+- [Tailwind CSS v4](https://tailwindcss.com/) — estilos
+- [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) — prose para posts
+- Tema claro/oscuro con `@custom-variant light`
+
+## Estructura
+
+```
+src/
+├── content/
+│   └── blog/              # Entradas del blog (Markdown)
+├── pages/
+│   ├── index.astro        # Homepage
+│   └── blog/
+│       ├── index.astro    # Listado de posts
+│       └── [slug].astro   # Vista individual de post
+├── styles/
+│   └── global.css         # Estilos globales + Tailwind
+└── content.config.ts      # Esquema de colecciones
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Blog
 
-## 🚀 Project Structure
+Las entradas van en `src/content/blog/`:
 
-Inside of your Astro project, you'll see the following folders and files:
+```markdown
+---
+title: "Título del post"
+description: "Descripción breve."
+date: 2026-03-11
+tags: ["backend", "arquitectura"]
+---
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+Contenido en Markdown...
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Desarrollo local
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # genera dist/
+npm run preview  # previsualiza el build
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deploy
 
-## 🧞 Commands
+GitHub Actions despliega automáticamente a Hostinger vía `rsync` sobre SSH al hacer push a `main`.
 
-All commands are run from the root of the project, from a terminal:
+**Secrets requeridos:**
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Secret | Descripción |
+|--------|-------------|
+| `HOSTINGER_HOST` | IP del servidor |
+| `HOSTINGER_USER` | Usuario SSH |
+| `HOSTINGER_PORT` | Puerto SSH (65002) |
+| `HOSTINGER_SSH_KEY` | Clave privada ed25519 |
+| `HOSTINGER_PATH` | Ruta destino en el servidor |
