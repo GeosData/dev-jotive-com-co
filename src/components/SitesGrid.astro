@@ -1,0 +1,81 @@
+---
+import SiteCard from './SiteCard.astro';
+
+const mainSite = {
+  title: "Desarrollo",
+  description: "Proyectos técnicos, tutoriales y experimentos de software. Full-stack, APIs y más.",
+  url: "https://dev.jotive.com.co",
+  icon: "💻",
+  accentColor: "emerald",
+  featured: true
+};
+
+const labSite = {
+  title: "Geosdata",
+  description: "Laboratorio indie: apps y productos digitales. Mi primera app: comparar ciudades en Colombia.",
+  url: "https://geosdata.com",
+  icon: "🗺️",
+  accentColor: "sky",
+  isLab: true
+};
+
+const hobbySites = [
+  {
+    title: "Educación",
+    description: "Recursos prácticos para docentes que quieren integrar tecnología en el aula, incluso sin internet.",
+    url: "https://edu.jotive.com.co",
+    icon: "📚",
+    accentColor: "amber"
+  },
+  {
+    title: "Videojuegos",
+    description: "Devlogs y desarrollo de mi juego de gestión de granjas en 2D. ¡Sígue el progreso!",
+    url: "https://play.jotive.com.co",
+    icon: "🎮",
+    accentColor: "rose"
+  },
+  {
+    title: "Naturaleza",
+    description: "Mis pasiones al aire libre: fotografía de naturaleza, senderismo y conexión con el entorno.",
+    url: "https://nature.jotive.com.co",
+    icon: "🌿",
+    accentColor: "emerald"
+  },
+  {
+    title: "Tech & Hardware",
+    description: "Cacharreo con Raspberry Pi, proyectos de hardware y experiments tecnológicos.",
+    url: "https://tech.jotive.com.co",
+    icon: "⚡",
+    accentColor: "violet"
+  }
+];
+---
+
+<section class="mb-16">
+  <div class="mb-10">
+    <h2 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-6">
+      Mi trabajo
+    </h2>
+    <SiteCard {...mainSite} />
+  </div>
+
+  <div class="mb-10">
+    <h2 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-6">
+      Mi laboratorio
+    </h2>
+    <div class="max-w-xl">
+      <SiteCard {...labSite} />
+    </div>
+  </div>
+
+  <div>
+    <h2 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-6">
+      Hobbies & más
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {hobbySites.map(site => (
+        <SiteCard {...site} />
+      ))}
+    </div>
+  </div>
+</section>
