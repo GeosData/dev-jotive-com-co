@@ -1,7 +1,11 @@
 ---
 import '../styles/global.css';
+import { getCollection } from 'astro:content';
 
 const currentYear = new Date().getFullYear();
+const recentPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
 
 const stack = [
   { name: 'Node.js', color: 'emerald' },
@@ -86,7 +90,7 @@ const projects = [
     <!-- Nav -->
     <nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
       <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="/" class="font-mono text-sm text-emerald-400 hover:text-emerald-300 transition-colors">josse.dev</a>
+        <a href="/" class="font-mono text-sm text-emerald-400 hover:text-emerald-300 transition-colors">jotive.dev</a>
         <div class="flex items-center gap-6 text-sm text-zinc-400">
           <a href="#proyectos" class="hover:text-zinc-100 transition-colors">Proyectos</a>
           <a href="#blog" class="hover:text-zinc-100 transition-colors">Blog</a>
@@ -116,7 +120,7 @@ const projects = [
         </p>
 
         <p class="text-zinc-500 text-base max-w-xl mb-10 leading-relaxed">
-          Construyo APIs, sistemas y productos que resuelven problemas reales. Trabajo principalmente con Node.js y JavaScript, desde Medellín 🇨🇴.
+          Construyo APIs, sistemas y productos que resuelven problemas reales. Trabajo principalmente con Node.js y JavaScript, desde Montería, Córdoba 🇨🇴.
         </p>
 
         <div class="flex flex-wrap gap-3">
@@ -190,12 +194,23 @@ const projects = [
         <div class="flex items-center gap-4 mb-8">
           <h2 class="text-sm font-mono text-zinc-500 uppercase tracking-widest">Blog</h2>
           <div class="h-px flex-1 bg-zinc-800"></div>
+          <a href="/blog" class="text-xs font-mono text-zinc-500 hover:text-emerald-400 transition-colors">Ver todos →</a>
         </div>
-        <div class="p-8 rounded-2xl border border-dashed border-zinc-800 text-center">
-          <div class="p-3 rounded-xl bg-zinc-900 w-fit mx-auto mb-4">
-            <svg class="w-6 h-6 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-          </div>
-          <p class="text-zinc-500 text-sm">Próximamente — artículos sobre backend, arquitectura y productos digitales.</p>
+        <div class="space-y-3">
+          {recentPosts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group flex items-center justify-between gap-4 p-4 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/30 transition-all duration-300"
+            >
+              <div class="flex-1 min-w-0">
+                <h3 class="font-medium text-zinc-200 group-hover:text-emerald-400 transition-colors truncate">{post.data.title}</h3>
+                <p class="text-zinc-600 text-sm truncate">{post.data.description}</p>
+              </div>
+              <time class="font-mono text-xs text-zinc-600 shrink-0">
+                {post.data.date.toLocaleDateString('es-CO', { month: 'short', day: 'numeric' })}
+              </time>
+            </a>
+          ))}
         </div>
       </section>
 

@@ -1,0 +1,83 @@
+---
+import '../../styles/global.css';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const currentYear = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={post.data.description}>
+  <title>{post.data.title} | jotive.dev</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="bg-zinc-950 text-zinc-300 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+  <div class="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-950/20 via-zinc-950 to-zinc-950 -z-10"></div>
+
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
+    <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="/" class="font-mono text-sm text-emerald-400 hover:text-emerald-300 transition-colors">jotive.dev</a>
+      <div class="flex items-center gap-6 text-sm text-zinc-400">
+        <a href="/blog" class="hover:text-zinc-100 transition-colors">← Blog</a>
+        <a href="https://jotive.com.co" class="hover:text-zinc-100 transition-colors">Inicio</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-2xl mx-auto px-6 pt-32 pb-24">
+
+    <header class="mb-12">
+      <div class="flex flex-wrap gap-1.5 mb-4">
+        {post.data.tags.map((tag) => (
+          <span class="px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-500 text-xs font-mono">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">{post.data.title}</h1>
+      <time class="font-mono text-sm text-zinc-600">
+        {post.data.date.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+    </header>
+
+    <article class="prose prose-zinc prose-invert prose-emerald max-w-none
+      prose-headings:font-bold prose-headings:text-zinc-100
+      prose-p:text-zinc-400 prose-p:leading-relaxed
+      prose-a:text-emerald-400 prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-zinc-200
+      prose-code:text-emerald-400 prose-code:bg-zinc-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+      prose-hr:border-zinc-800
+      prose-li:text-zinc-400">
+      <Content />
+    </article>
+
+    <div class="mt-16 pt-8 border-t border-zinc-800">
+      <a href="/blog" class="inline-flex items-center gap-2 text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-mono">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        Volver al blog
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-zinc-800/80">
+    <div class="max-w-5xl mx-auto px-6 py-8">
+      <p class="text-sm text-zinc-600 font-mono">© {currentYear} Josse · dev.jotive.com.co</p>
+    </div>
+  </footer>
+</body>
+</html>

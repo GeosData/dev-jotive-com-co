@@ -1,15 +1,12 @@
 ---
 import '../../styles/global.css';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 
 const currentYear = new Date().getFullYear();
-const posts = [
-  {
-    title: 'Bienvenido a mi blog',
-    description: 'Un espacio donde comparto mis aprendizajes, proyectos y pensamientos sobre tecnología, desarrollo y vida.',
-    date: '2026-03-09',
-    slug: 'bienvenido'
-  }
-];
 ---
 
 <!doctype html>
@@ -17,129 +14,64 @@ const posts = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Blog de Jotive - Artículos sobre desarrollo, tecnología y proyectos personales">
-  <meta name="keywords" content="blog, desarrollo, tecnología, programación, backend, full-stack">
-  <meta name="author" content="Josse">
-  <meta name="robots" content="index, follow">
-  
-  <meta property="og:title" content="Blog | Jotive">
-  <meta property="og:description" content="Artículos sobre desarrollo, tecnología y proyectos personales">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jotive.com.co/blog">
-  <meta property="og:site_name" content="Jotive">
-  
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Blog | Jotive">
-  <meta name="twitter:description" content="Artículos sobre desarrollo, tecnología y proyectos personales">
-  
-  <link rel="canonical" href="https://jotive.com.co/blog">
-  <link rel="alternate" hreflang="es" href="https://jotive.com.co/blog">
-  <link rel="prev" href="https://jotive.com.co">
-  
-  <title>Blog | Jotive</title>
+  <meta name="description" content="Blog de Josse — artículos sobre backend, arquitectura y productos digitales.">
+  <title>Blog | jotive.dev</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body class="bg-[var(--bg-primary)] text-zinc-300 font-sans selection:bg-emerald-500/30 selection:text-emerald-200 transition-colors duration-300">
-  <div class="relative min-h-screen">
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-zinc-900/50 via-zinc-950 to-zinc-950 -z-10 light:from-zinc-100/50 light:via-zinc-50 light:to-zinc-50 transition-colors duration-300"></div>
+<body class="bg-zinc-950 text-zinc-300 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+  <div class="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-950/20 via-zinc-950 to-zinc-950 -z-10"></div>
 
-    <button 
-      id="theme-toggle" 
-      class="fixed top-6 right-6 z-50 p-2.5 rounded-xl bg-zinc-800/80 border border-zinc-700/50 hover:border-zinc-500 text-zinc-400 hover:text-white transition-all duration-300 hover:scale-110 light:bg-white light:border-zinc-200 light:text-zinc-600 light:hover:text-zinc-900"
-      aria-label="Cambiar tema"
-    >
-      <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-      </svg>
-      <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-      </svg>
-    </button>
-
-    <main class="flex-1 relative z-10">
-      <div class="max-w-4xl mx-auto px-6 py-24 md:py-32">
-        
-        <header class="mb-16">
-          <a href="/" class="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-300 transition-colors mb-8 light:hover:text-zinc-600">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-            Volver al inicio
-          </a>
-          
-          <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white light:text-zinc-900 transition-colors duration-300">
-            Blog
-          </h1>
-          <p class="text-xl text-zinc-400 light:text-zinc-600 transition-colors duration-300">
-            Artículos, pensamientos y aprendizajes.
-          </p>
-        </header>
-
-        <section>
-          <div class="space-y-6">
-            {posts.map(post => (
-              <article class="group">
-                <a href={`/blog/${post.slug}`} class="block p-6 rounded-3xl bg-zinc-900/30 border border-zinc-800/30 hover:border-emerald-500/30 hover:bg-zinc-900/50 transition-all duration-300 light:bg-white/30 light:border-zinc-200/30 light:hover:border-emerald-400/30 light:hover:bg-white/50">
-                  <div class="flex items-start justify-between gap-4">
-                    <div>
-                      <time class="text-sm text-zinc-500 light:text-zinc-400 mb-2 block transition-colors duration-300">{post.date}</time>
-                      <h2 class="text-xl font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors light:text-zinc-900 light:group-hover:text-emerald-600 mb-2">
-                        {post.title}
-                      </h2>
-                      <p class="text-zinc-400 light:text-zinc-600 text-sm leading-relaxed transition-colors duration-300">
-                        {post.description}
-                      </p>
-                    </div>
-                    <svg class="w-5 h-5 text-zinc-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all flex-shrink-0 light:text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                    </svg>
-                  </div>
-                </a>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <footer class="mt-20 pt-8 border-t border-zinc-800/80 light:border-zinc-200 flex flex-col md:flex-row items-center justify-between gap-6 transition-colors duration-300">
-          <p class="text-sm text-zinc-500 light:text-zinc-500 font-medium transition-colors duration-300">
-            © {currentYear} Jotive.
-          </p>
-          <div class="flex gap-6">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-white light:hover:text-zinc-900 hover:-translate-y-0.5 transition-all">
-              <span class="sr-only">GitHub</span>
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" /></svg>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-sky-400 hover:-translate-y-0.5 transition-all">
-              <span class="sr-only">Twitter</span>
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-blue-500 hover:-translate-y-0.5 transition-all">
-              <span class="sr-only">LinkedIn</span>
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" /></svg>
-            </a>
-          </div>
-        </footer>
-
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-sm">
+    <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="/" class="font-mono text-sm text-emerald-400 hover:text-emerald-300 transition-colors">jotive.dev</a>
+      <div class="flex items-center gap-6 text-sm text-zinc-400">
+        <a href="/#proyectos" class="hover:text-zinc-100 transition-colors">Proyectos</a>
+        <span class="text-emerald-400">Blog</span>
+        <a href="https://jotive.com.co" class="hover:text-zinc-100 transition-colors">← Volver</a>
       </div>
-    </main>
-  </div>
+    </div>
+  </nav>
 
-  <script>
-    const toggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-    
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      html.classList.add('light');
-    }
-    
-    toggle?.addEventListener('click', () => {
-      html.classList.toggle('light');
-      localStorage.setItem('theme', html.classList.contains('light') ? 'light' : 'dark');
-    });
-  </script>
+  <main class="max-w-3xl mx-auto px-6 pt-32 pb-24">
+    <div class="mb-16">
+      <p class="font-mono text-emerald-400 text-sm mb-3">blog</p>
+      <h1 class="text-4xl font-bold text-white mb-4">Artículos</h1>
+      <p class="text-zinc-400">Notas sobre backend, arquitectura y productos digitales.</p>
+    </div>
+
+    <div class="space-y-4">
+      {posts.map((post) => (
+        <a
+          href={`/blog/${post.id}`}
+          class="group flex items-start justify-between gap-6 p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/30 transition-all duration-300 hover:-translate-y-0.5"
+        >
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap gap-1.5 mb-2">
+              {post.data.tags.map((tag) => (
+                <span class="px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-500 text-xs font-mono">{tag}</span>
+              ))}
+            </div>
+            <h2 class="font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors mb-1">{post.data.title}</h2>
+            <p class="text-zinc-500 text-sm leading-relaxed">{post.data.description}</p>
+          </div>
+          <div class="flex flex-col items-end gap-3 shrink-0">
+            <time class="font-mono text-xs text-zinc-600">
+              {post.data.date.toLocaleDateString('es-CO', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </time>
+            <svg class="w-4 h-4 text-zinc-600 group-hover:text-emerald-400 transform group-hover:-rotate-45 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+
+  <footer class="border-t border-zinc-800/80">
+    <div class="max-w-5xl mx-auto px-6 py-8">
+      <p class="text-sm text-zinc-600 font-mono">© {currentYear} Josse · dev.jotive.com.co</p>
+    </div>
+  </footer>
 </body>
 </html>
