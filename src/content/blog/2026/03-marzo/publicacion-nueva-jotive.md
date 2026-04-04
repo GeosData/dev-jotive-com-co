@@ -1,6 +1,6 @@
 ﻿---
 title: "Publicacion nueva en el blog de Jotive"
-publishDate: "2026-03-11"
+date: 2026-03-11
 description: "Resumen practico sobre como estructurar y publicar contenido tecnico que aporte valor real."
 tags: ["Blog", "Contenido", "Desarrollo Web", "Productividad"]
 draft: false
