@@ -3,56 +3,61 @@ import '../styles/global.css';
 import { getCollection } from 'astro:content';
 
 const currentYear = new Date().getFullYear();
+const siteUrl = 'https://dev.jotive.com.co';
+const ogImage = `${siteUrl}/og-image.svg`;
 const recentPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
 const stack = [
-  { name: 'Node.js', color: 'emerald' },
-  { name: 'JavaScript', color: 'yellow' },
-  { name: 'TypeScript', color: 'blue' },
-  { name: 'Express', color: 'zinc' },
+  { name: 'Python', color: 'yellow' },
+  { name: 'FastAPI', color: 'teal' },
+  { name: 'LangChain', color: 'emerald' },
+  { name: 'LangGraph', color: 'green' },
+  { name: 'OpenAI', color: 'zinc' },
+  { name: 'FAISS', color: 'orange' },
+  { name: 'Milvus', color: 'blue' },
   { name: 'PostgreSQL', color: 'sky' },
-  { name: 'MongoDB', color: 'green' },
+  { name: 'Redis', color: 'red' },
   { name: 'Docker', color: 'cyan' },
-  { name: 'REST APIs', color: 'violet' },
+  { name: 'Kubernetes', color: 'indigo' },
 ];
 
 const projects = [
   {
-    name: 'TaskERP',
-    description: 'Sistema ERP basado en microservicios para gestión de cadena de suministro y proyectos. Backend en Node.js/Express, app móvil en Kotlin, web en Angular y almacenamiento en Firebase.',
-    tags: ['Node.js', 'Express', 'Angular', 'Kotlin', 'Firebase'],
-    url: 'https://github.com/jotive/TaskERP',
+    name: 'DocuQuery',
+    description: 'RAG platform que indexa corpus documentales y responde consultas en lenguaje natural con LLM. Respuestas contextualizadas con referencias a fuentes en segundos. Multi-tenant con cost tracking por request.',
+    tags: ['FastAPI', 'PostgreSQL', 'Qdrant', 'Redis', 'Celery', 'OpenAI'],
+    url: 'https://github.com/GeosData/llm-rag-platform',
     color: 'emerald',
   },
   {
-    name: 'Esfinge Voting Platform',
-    description: 'Plataforma SaaS de votaciones digitales para instituciones educativas. Solución completa con gestión de elecciones, candidatos y resultados en tiempo real.',
-    tags: ['SaaS', 'Backend', 'Full-Stack'],
-    url: 'https://github.com/jotive/esfinge-voting-platform',
+    name: 'ClaimFlow',
+    description: 'Sistema de orquestación multi-step para pipelines de aprobación. Cada agente maneja un paso discreto — extracción, validación, decisión, notificación — con logs de razonamiento completo para auditoría.',
+    tags: ['Python', 'LangGraph', 'LangChain', 'ARQ', 'Redis', 'OpenTelemetry'],
+    url: 'https://github.com/GeosData/ai-agents-workflow',
     color: 'violet',
   },
   {
-    name: 'Tuttostore E-commerce',
-    description: 'Plataforma de e-commerce con API REST y frontend desacoplado. Gestión de productos, pedidos y pagos para la plataforma Dycil.',
-    tags: ['REST API', 'E-commerce', 'Full-Stack'],
-    url: 'https://github.com/jotive/dycil-tuttostore-api',
+    name: 'AIGateway',
+    description: 'Gateway multi-tenant que abstrae LLM providers tras API unificada. Model routing, fallback automático, rate limiting por API key, cost tracking y observabilidad completa. Listo para producción en días.',
+    tags: ['FastAPI', 'Redis', 'PostgreSQL', 'Prometheus', 'Grafana', 'Tenacity'],
+    url: 'https://github.com/GeosData/production-ai-backend',
     color: 'sky',
   },
   {
-    name: 'ARCA Campetrol Directory',
-    description: 'API de directorio empresarial para Campetrol. Incluye plugin WordPress para exportación de datos y gestión de empresas del sector energético.',
-    tags: ['REST API', 'WordPress', 'PHP'],
-    url: 'https://github.com/jotive/arca-campetrol-directory',
+    name: 'TalentMatch',
+    description: 'Servicio de búsqueda semántica de alta performance. Hybrid ranking (BM25 + vector) para capturar intención más allá de keywords. Indexación batch y realtime con filtros de metadata.',
+    tags: ['Python', 'FastAPI', 'Qdrant', 'PostgreSQL', 'sentence-transformers'],
+    url: 'https://github.com/GeosData/vector-search-api',
     color: 'amber',
   },
   {
-    name: 'Pokémon Explorer',
-    description: 'Aplicación web construida con Angular y PokéAPI. Explorador de Pokémon con búsqueda, filtros y visualización de estadísticas.',
-    tags: ['Angular', 'TypeScript', 'PokéAPI'],
-    url: 'https://github.com/jotive/pokemon-explorer',
-    color: 'rose',
+    name: 'SmartShop',
+    description: 'Backend para PYMEs locales: inventario en tiempo real con alertas WhatsApp, tracking de ventas, gestión de órdenes y forecasting semanal. Multi-tenant con roles (dueño + staff).',
+    tags: ['FastAPI', 'PostgreSQL', 'Redis', 'Celery', 'WebSockets', 'Pandas'],
+    url: 'https://github.com/GeosData/smartshop',
+    color: 'orange',
   },
 ];
 ---
@@ -62,26 +67,61 @@ const projects = [
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jotive — Full-Stack Developer con foco en backend y productos digitales. Node.js, JavaScript, APIs REST. Disponible para proyectos.">
-  <meta name="keywords" content="full-stack developer, backend developer, Node.js, JavaScript, Colombia, Medellín, portfolio, productos digitales">
+  <meta name="description" content="Ingeniero de Sistemas especializado en AI Backend. Construyo sistemas LLM, arquitectura RAG, agentes inteligentes y APIs de búsqueda semántica. Experiencia con LangChain, LangGraph, vector databases y LLMOps. Disponible para proyectos en Colombia y remoto.">
+  <meta name="keywords" content="ingeniero de sistemas, AI backend, LLM developer, Python AI, LangChain, LangGraph, RAG architecture, vector search, FAISS, Milvus, OpenAI, FastAPI, agentes AI, embeddings, búsqueda semántica, LLMOps, Colombia, Montería, Córdoba, desarrollador backend, AI engineer">
   <meta name="author" content="Jotive">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="googlebot" content="index, follow">
 
-  <meta property="og:title" content="Jotive | Full-Stack Developer · Backend">
-  <meta property="og:description" content="Full-Stack Developer con foco en backend y productos digitales. Node.js, JavaScript, APIs REST.">
+  <meta property="og:title" content="Jotive | Ingeniero de Sistemas · AI Backend">
+  <meta property="og:description" content="Ingeniero de Sistemas especializado en AI Backend. Construyo sistemas LLM, arquitectura RAG, agentes inteligentes y APIs de búsqueda semántica.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://dev.jotive.com.co">
+  <meta property="og:url" content={siteUrl}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Jotive.dev">
+  <meta property="og:locale" content="es_CO">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Jotive | Full-Stack Developer · Backend">
-  <meta name="twitter:description" content="Full-Stack Developer con foco en backend y productos digitales. Node.js, JavaScript, APIs REST.">
+  <meta name="twitter:title" content="Jotive | Ingeniero de Sistemas · AI Backend">
+  <meta name="twitter:description" content="Ingeniero de Sistemas especializado en AI Backend. Construyo sistemas LLM, arquitectura RAG, agentes inteligentes y APIs de búsqueda semántica.">
+  <meta name="twitter:image" content={ogImage}>
 
-  <link rel="canonical" href="https://dev.jotive.com.co">
-  <title>Jotive | Full-Stack Developer · Backend</title>
+  <link rel="canonical" href={siteUrl}>
+  <title>Jotive | Ingeniero de Sistemas · AI Backend</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jotive",
+      "url": "https://dev.jotive.com.co",
+      "jobTitle": "Ingeniero de Sistemas · AI Backend",
+      "description": "Ingeniero de Sistemas especializado en AI Backend. Construyo sistemas LLM, arquitectura RAG, agentes inteligentes y APIs de búsqueda semántica.",
+      "knowsAbout": ["Python", "FastAPI", "LangChain", "LangGraph", "OpenAI", "RAG", "Vector Databases", "FAISS", "Milvus", "LLM", "AI Agents", "Embeddings", "LLMOps"],
+      "sameAs": [
+        "https://github.com/jotive",
+        "https://linkedin.com/in/jotive",
+        "https://twitter.com/jotive"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Jotive"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Montería",
+        "addressRegion": "Córdoba",
+        "addressCountry": "CO"
+      }
+    }
+  </script>
 </head>
 <body class="bg-zinc-950 text-zinc-300 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
   <div class="relative min-h-screen">
@@ -116,11 +156,11 @@ const projects = [
         </h1>
 
         <p class="text-xl md:text-2xl text-zinc-400 font-light mb-4 max-w-2xl">
-          Full-Stack Developer con foco en <span class="text-zinc-200 font-medium">backend</span> y desarrollo de <span class="text-zinc-200 font-medium">productos digitales</span>.
+          <span class="text-zinc-200 font-medium">Ingeniero de Sistemas</span> especializado en <span class="text-zinc-200 font-medium">AI Backend</span>. Construyo sistemas LLM, agentes inteligentes y APIs de búsqueda semántica a escala de producción.
         </p>
 
         <p class="text-zinc-500 text-base max-w-xl mb-10 leading-relaxed">
-          Construyo APIs, sistemas y productos que resuelven problemas reales. Trabajo principalmente con Node.js y JavaScript, desde Montería, Córdoba 🇨🇴.
+          Experiencia en arquitectura RAG, orquestación con LangChain/LangGraph y vector databases (FAISS, Milvus). Desde Montería, Córdoba 🇨🇴 — disponible para proyectos remotos.
         </p>
 
         <div class="flex flex-wrap gap-3">

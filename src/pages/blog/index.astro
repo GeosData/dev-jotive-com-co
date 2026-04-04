@@ -7,6 +7,9 @@ const posts = (await getCollection('blog')).sort(
 );
 
 const currentYear = new Date().getFullYear();
+const siteUrl = 'https://dev.jotive.com.co';
+const blogUrl = `${siteUrl}/blog`;
+const ogImage = `${siteUrl}/og-image.svg`;
 ---
 
 <!doctype html>
@@ -14,12 +17,48 @@ const currentYear = new Date().getFullYear();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Blog de Jotive — artículos sobre backend, arquitectura y productos digitales.">
-  <title>Blog | jotive.dev</title>
+  <meta name="description" content="Blog de Jotive — artículos prácticos sobre backend, arquitectura de software, Node.js y desarrollo de productos digitales. Tutoriales y aprendizajes de un desarrollador full-stack.">
+  <meta name="keywords" content="blog backend, Node.js, TypeScript, arquitectura software, APIs REST, microservicios, desarrollo web, Colombia, tutoriales backend">
+  <meta name="author" content="Jotive">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Blog | Jotive — Backend, Arquitectura & Node.js">
+  <meta property="og:description" content="Artículos prácticos sobre backend, arquitectura de software y Node.js. Aprendizajes de un desarrollador full-stack.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={blogUrl}>
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Jotive.dev">
+  <meta property="og:locale" content="es_CO">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Blog | Jotive — Backend, Arquitectura & Node.js">
+  <meta name="twitter:description" content="Artículos prácticos sobre backend, arquitectura de software y Node.js.">
+  <meta name="twitter:image" content={ogImage}>
+
+  <link rel="canonical" href={blogUrl}>
+  <title>Blog | Jotive — Backend, Arquitectura & Node.js</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Schema.org Blog -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Blog de Jotive",
+      "description": "Artículos prácticos sobre backend, arquitectura de software y Node.js",
+      "url": "https://dev.jotive.com.co/blog",
+      "author": {
+        "@type": "Person",
+        "name": "Jotive",
+        "url": "https://dev.jotive.com.co"
+      }
+    }
+  </script>
 </head>
 <body class="bg-zinc-950 text-zinc-300 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
   <div class="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-950/20 via-zinc-950 to-zinc-950 -z-10"></div>
@@ -39,7 +78,7 @@ const currentYear = new Date().getFullYear();
     <div class="mb-16">
       <p class="font-mono text-emerald-400 text-sm mb-3">blog</p>
       <h1 class="text-4xl font-bold text-white mb-4">Artículos</h1>
-      <p class="text-zinc-400">Notas sobre backend, arquitectura y productos digitales.</p>
+      <p class="text-zinc-400">Aprendizajes prácticos sobre backend, arquitectura de software y construcción de productos digitales. Sin teoría vacía — solo lo que funciona en producción.</p>
     </div>
 
     <div class="space-y-4">
