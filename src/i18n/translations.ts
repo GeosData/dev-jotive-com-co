@@ -8,8 +8,8 @@ export const translations = {
     hero: {
       available: 'Disponible para nuevos proyectos',
       title: 'Hola, soy',
-      role: 'Ingeniero de Sistemas especializado en AI Backend. Construyo sistemas LLM, agentes inteligentes y APIs de búsqueda semántica a escala de producción.',
-      location: 'Experiencia en arquitectura RAG, orquestación con LangChain/LangGraph y vector databases (FAISS, Milvus). Desde Montería, Córdoba — disponible para proyectos remotos.',
+      role: 'Senior Backend Engineer especializado en Python y Node.js. Construyo APIs y microservicios en producción, integro IA en flujos de negocio reales y lidero comunidades técnicas de Cloud y Seguridad.',
+      location: 'Experiencia en FastAPI, LangChain, LangGraph y PostgreSQL. Desde Montería, Córdoba — disponible para proyectos remotos.',
       cta: 'Ver proyectos',
     },
     stack: {
@@ -47,8 +47,8 @@ export const translations = {
     hero: {
       available: 'Available for new projects',
       title: 'Hi, I\'m',
-      role: 'Systems Engineer specialized in AI Backend. I build LLM systems, intelligent agents and semantic search APIs at production scale.',
-      location: 'Experience in RAG architecture, orchestration with LangChain/LangGraph and vector databases (FAISS, Milvus). Based in Montería, Colombia — available for remote projects.',
+      role: 'Senior Backend Engineer specialized in Python and Node.js. I build production APIs and microservices, integrate AI into real business workflows, and lead Cloud & Security technical communities.',
+      location: 'Experience with FastAPI, LangChain, LangGraph, and PostgreSQL. Based in Montería, Colombia — available for remote projects.',
       cta: 'View projects',
     },
     stack: {
