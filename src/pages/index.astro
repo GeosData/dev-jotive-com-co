@@ -71,6 +71,7 @@ const projects = [
     description: 'Backend para PYMEs locales: inventario en tiempo real con alertas WhatsApp, tracking de ventas, gestión de órdenes y forecasting semanal. Multi-tenant con roles (dueño + staff).',
     tags: ['FastAPI', 'PostgreSQL', 'Redis', 'Celery', 'WebSockets', 'Pandas'],
     url: 'https://github.com/GeosData/smartshop',
+    demo: 'https://smartshop-jotivegmailcoms-projects.vercel.app',
     color: 'orange',
   },
 ];
@@ -336,11 +337,23 @@ const projects = [
               </div>
               <h3 class="font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors mb-2">{project.name}</h3>
               <p class="text-zinc-500 text-sm leading-relaxed mb-4">{project.description}</p>
-              <div class="flex flex-wrap gap-1.5">
+              <div class="flex flex-wrap gap-1.5 mb-3">
                 {project.tags.map((tag) => (
                   <span class="px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-500 text-xs font-mono">{tag}</span>
                 ))}
               </div>
+              {'demo' in project && (project as any).demo && (
+                <a
+                  href={(project as any).demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors"
+                  onclick="event.stopPropagation()"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Live Demo
+                </a>
+              )}
             </a>
           ))}
         </div>
