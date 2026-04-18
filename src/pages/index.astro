@@ -39,32 +39,20 @@ const stack = {
 
 const projects = [
   {
+    name: 'Order Processing Platform',
+    description: 'Backend production-grade para procesamiento de pedidos. API REST con idempotency dual-layer (Redis + unique constraint), cursor pagination, token bucket rate limiting atómico vía Lua, read-through cache, logs JSON estructurados con correlation IDs. Cada decisión documentada como ADR.',
+    tags: ['Python 3.12', 'FastAPI', 'PostgreSQL 16', 'Redis 7', 'SQLAlchemy 2.0', 'Alembic', 'Docker', 'GitHub Actions'],
+    url: 'https://github.com/jotive/order-processing-platform',
+    color: 'emerald',
+    featured: true,
+    status: 'WIP',
+  },
+  {
     name: 'DocuQuery',
     description: 'RAG platform que indexa corpus documentales y responde consultas en lenguaje natural con LLM. Respuestas contextualizadas con referencias a fuentes en segundos. Multi-tenant con cost tracking por request.',
     tags: ['FastAPI', 'PostgreSQL', 'Qdrant', 'Redis', 'Celery', 'OpenAI'],
     url: 'https://github.com/GeosData/llm-rag-platform',
     color: 'emerald',
-  },
-  {
-    name: 'ClaimFlow',
-    description: 'Sistema de orquestación multi-step para pipelines de aprobación. Cada agente maneja un paso discreto — extracción, validación, decisión, notificación — con logs de razonamiento completo para auditoría.',
-    tags: ['Python', 'LangGraph', 'LangChain', 'ARQ', 'Redis', 'OpenTelemetry'],
-    url: 'https://github.com/GeosData/ai-agents-workflow',
-    color: 'violet',
-  },
-  {
-    name: 'AIGateway',
-    description: 'Gateway multi-tenant que abstrae LLM providers tras API unificada. Model routing, fallback automático, rate limiting por API key, cost tracking y observabilidad completa. Listo para producción en días.',
-    tags: ['FastAPI', 'Redis', 'PostgreSQL', 'Prometheus', 'Grafana', 'Tenacity'],
-    url: 'https://github.com/GeosData/production-ai-backend',
-    color: 'sky',
-  },
-  {
-    name: 'TalentMatch',
-    description: 'Servicio de búsqueda semántica de alta performance. Hybrid ranking (BM25 + vector) para capturar intención más allá de keywords. Indexación batch y realtime con filtros de metadata.',
-    tags: ['Python', 'FastAPI', 'Qdrant', 'PostgreSQL', 'sentence-transformers'],
-    url: 'https://github.com/GeosData/vector-search-api',
-    color: 'amber',
   },
   {
     name: 'SmartShop',
@@ -327,16 +315,40 @@ const projects = [
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="group relative p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-10px_rgba(16,185,129,0.1)]"
+              class:list={[
+                "group relative p-6 rounded-2xl bg-zinc-900/60 border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-10px_rgba(16,185,129,0.1)]",
+                (project as any).featured
+                  ? "md:col-span-2 border-emerald-500/40 bg-gradient-to-br from-emerald-950/40 via-zinc-900/60 to-zinc-900/60 hover:border-emerald-400/60"
+                  : "border-zinc-800 hover:border-emerald-500/30"
+              ]}
             >
+              {(project as any).featured && (
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono uppercase tracking-wider">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Flagship
+                  </span>
+                  {(project as any).status && (
+                    <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[10px] font-mono uppercase tracking-wider">
+                      {(project as any).status}
+                    </span>
+                  )}
+                </div>
+              )}
               <div class="flex items-start justify-between mb-3">
                 <div class="p-2 rounded-lg bg-zinc-800 text-emerald-400">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
                 </div>
                 <svg class="w-4 h-4 text-zinc-600 group-hover:text-emerald-400 transform group-hover:-rotate-45 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
               </div>
-              <h3 class="font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors mb-2">{project.name}</h3>
-              <p class="text-zinc-500 text-sm leading-relaxed mb-4">{project.description}</p>
+              <h3 class:list={[
+                "font-semibold group-hover:text-emerald-400 transition-colors mb-2",
+                (project as any).featured ? "text-xl text-white" : "text-zinc-100"
+              ]}>{project.name}</h3>
+              <p class:list={[
+                "text-sm leading-relaxed mb-4",
+                (project as any).featured ? "text-zinc-400" : "text-zinc-500"
+              ]}>{project.description}</p>
               <div class="flex flex-wrap gap-1.5 mb-3">
                 {project.tags.map((tag) => (
                   <span class="px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-500 text-xs font-mono">{tag}</span>
