@@ -1,6 +1,7 @@
 ---
 import '../../styles/global.css';
 import { getCollection, render } from 'astro:content';
+import VideoEmbed from '../../components/VideoEmbed.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -13,6 +14,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const currentYear = new Date().getFullYear();
+const hasVideo = post.data.youtube_id && post.data.youtube_id.length > 0;
 const siteUrl = 'https://dev.jotive.com.co';
 const postUrl = `${siteUrl}/blog/${post.id}`;
 const ogImage = `${siteUrl}/og-image.svg`;
@@ -101,6 +103,8 @@ const ogImage = `${siteUrl}/og-image.svg`;
         {post.data.date.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' })}
       </time>
     </header>
+
+    {hasVideo && <VideoEmbed id={post.data.youtube_id} title={post.data.title} />}
 
     <article class="prose prose-zinc prose-invert prose-emerald max-w-none
       prose-headings:font-bold prose-headings:text-zinc-100
