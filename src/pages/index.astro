@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { getCollection } from 'astro:content';
 import { translations, type Lang } from '../i18n/translations';
+import NewsletterForm from '../components/NewsletterForm.astro';
 
 const currentYear = new Date().getFullYear();
 const siteUrl = 'https://dev.jotive.com.co';
@@ -468,6 +469,9 @@ const projects = [
       </section>
 
     </main>
+
+    <!-- Newsletter -->
+    <NewsletterForm />
 
     <!-- Footer -->
     <footer class="border-t border-zinc-800/80 bg-zinc-950">
